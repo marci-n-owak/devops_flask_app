@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     stages {
         stage('Clear running apps') {
             steps {
