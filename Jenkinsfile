@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+        DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
+    }
+
     stages {
         stage('Clear running apps') {
             steps {
