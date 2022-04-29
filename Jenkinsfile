@@ -2,6 +2,8 @@ pipeline {
     agent any
 
     environment {
+        sonarqubeScanner = tool 'sonarqube'
+        SONARQUBE_TOKEN = credentials('SONARQUBE_TOKEN')
         DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
     }
 
@@ -9,6 +11,16 @@ pipeline {
         stage('Clear running apps') {
             steps {
                 sh 'docker rm -f devops_flask_app || true'
+            }
+        }
+        stage('Sonarqube analysis frontend') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh "${sonarScanner}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
+                }
+                timeout(time: 1, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
         stage('Build Docker Image') {
@@ -21,7 +33,7 @@ pipeline {
                 sh "docker run -d -p 0.0.0.0:5555:5555 --name devops_flask_app -t devops_flask_app:${BUILD_NUMBER}"
             }
         }
-        stage('Upload backend Docker Image to Docker Hub') {
+        stage('Upload Docker Image to Docker Hub') {
             steps {
                 sh "docker login -u devopstkhtechnology -p ${DOCKER_HUB_PASSWORD}"
                 sh "docker tag devops_flask_app:${BUILD_NUMBER} devopstkhtechnology/devops_flask_app:${BUILD_NUMBER}"
