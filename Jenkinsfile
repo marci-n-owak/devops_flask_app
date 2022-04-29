@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        sonarqubeScanner = tool 'sonarqube'
+        scannerHome = tool 'SonarQube'
         SONARQUBE_TOKEN = credentials('SONARQUBE_TOKEN')
         DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
     }
@@ -15,8 +15,8 @@ pipeline {
         }
         stage('Sonarqube analysis frontend') {
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh "${sonarScanner}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
+                withSonarQubeEnv('SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
                 }
                 timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
