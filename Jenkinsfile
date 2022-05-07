@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Run app') {
             steps {
-                sh "docker run -d -p 0.0.0.0:5555:5555 --name devops_flask_app -t devops_flask_app:${BUILD_NUMBER} --net=docker_network"
+                sh "docker run -d -p 0.0.0.0:5555:5555 --net=docker_network --name devops_flask_app -t devops_flask_app:${BUILD_NUMBER}"
             }
         }
         stage('Selenium tests') {
