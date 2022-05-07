@@ -39,7 +39,7 @@ def test_decrement():
 
     assert counter == newcounter
 
-    print("Test 1 passed")
+    print("Test 2 passed")
 
 try:
     print("Test 1")
@@ -47,8 +47,8 @@ try:
 
     print("Test 2")
     test_decrement()
-    
-    driver.close()
 
 finally:
     print("Tests finished")
+
+    driver.quit()
