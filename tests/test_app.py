@@ -8,7 +8,6 @@ driver = webdriver.Remote(
     desired_capabilities=DesiredCapabilities.FIREFOX)
 
 def test_increment():
-    driver = webdriver.Chrome()
     driver.get("http://devops_flask_app:5555/")
 
     counter = driver.find_element(By.ID, "counter")
@@ -26,7 +25,6 @@ def test_increment():
 
 
 def test_decrement():
-    driver = webdriver.Chrome()
     driver.get("http://devops_flask_app:5555/")
 
     counter = driver.find_element(By.ID, "counter")
