@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 
 def test_increment():
     driver = webdriver.Chrome()
-    driver.get("http://firefox-env:5555/")
+    driver.get("http://devops_flask_app:5555/")
 
     counter = driver.find_element(By.ID, "counter")
     counter = int(counter.text) + 1
@@ -22,7 +22,7 @@ def test_increment():
 
 def test_decrement():
     driver = webdriver.Chrome()
-    driver.get("http://firefox-env:5555/")
+    driver.get("http://devops_flask_app:5555/")
 
     counter = driver.find_element(By.ID, "counter")
     counter = int(counter.text) - 1
