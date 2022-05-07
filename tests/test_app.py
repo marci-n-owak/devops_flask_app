@@ -1,6 +1,11 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.by import By
+
+driver = webdriver.Remote(
+    command_executor=('http://selenium-env:4444/wd/hub'),
+    desired_capabilities=DesiredCapabilities.FIREFOX)
 
 def test_increment():
     driver = webdriver.Chrome()
