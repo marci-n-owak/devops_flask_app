@@ -13,7 +13,7 @@ pipeline {
                 sh 'docker rm -f devops_flask_app || true'
             }
         }
-        stage('Sonarqube analysis frontend') {
+        stage('Sonarqube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"

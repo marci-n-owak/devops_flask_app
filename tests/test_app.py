@@ -21,7 +21,7 @@ def test_increment():
     newcounter = driver.find_element(By.ID, "counter")
     newcounter = int(newcounter.text)
 
-    assert counter == newcounter
+    assert counter != newcounter
 
     print("Test 1 passed")
 
@@ -37,7 +37,7 @@ def test_decrement():
     newcounter = driver.find_element(By.ID, "counter")
     newcounter = int(newcounter.text)
 
-    assert counter == newcounter
+    assert counter != newcounter
 
     print("Test 2 passed")
 
